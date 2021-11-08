@@ -1,3 +1,4 @@
+import { Paper, Typography, Container } from "@mui/material";
 import { useContext } from "react";
 import { useNavigate } from "react-router";
 import { UserContext } from "../App";
@@ -24,15 +25,31 @@ const SignUpForm = () => {
   }
 
   return (
-    <>
-      <h2>Sign Up</h2>
-      <Form
-        initialState={initialState}
-        submit="Register"
-        submitForm={submitForm}
-        labels={labels}
-      />
-    </>
+    <Container maxWidth="xs">
+      <Paper
+        elevation={4}
+        sx={{
+          p: 2,
+          pb: 4
+        }}
+      >
+        <Typography
+          variant="h3"
+          component="h2"
+          color="primary"
+          align="center"
+          gutterBottom
+        >
+          Sign Up
+        </Typography>
+        <Form
+          initialState={initialState}
+          submit="Register"
+          submitForm={submitForm}
+          labels={labels}
+        />
+      </Paper>
+    </Container>
   );
 };
 

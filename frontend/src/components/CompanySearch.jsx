@@ -1,11 +1,13 @@
-import {useState} from "react"; 
+import { Button, Container, TextField } from "@mui/material";
+import { Box } from "@mui/system";
+import { useState } from "react";
 
-const CompanySearch = ({searchCompanies}) => {
+const CompanySearch = ({ searchCompanies }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [isSearching, setIsSearching] = useState(false);
 
   function handleChange(evt) {
-    const {value} = evt.target;
+    const { value } = evt.target;
     setSearchTerm(value);
   }
 
@@ -19,17 +21,34 @@ const CompanySearch = ({searchCompanies}) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <label>
-        Search By Name
-        <input
-          type="text"
-          required
-          value={searchTerm}
-          placeholder="Davis"
-          onChange={handleChange}
-        />
-      </label>
-      <button disabled={isSearching} type="submit">Go!</button>
+      <Container maxWidth="sm">
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            mb: 4
+          }}
+        >
+          <TextField
+            label="Search By Name"
+            type="text"
+            required
+            value={searchTerm}
+            placeholder="Davis"
+            onChange={handleChange}
+            color="primary"
+            fullWidth
+          />
+          <Button
+            color="primary"
+            disabled={isSearching}
+            type="submit"
+            variant="contained"
+          >
+            Go!
+          </Button>
+        </Box>
+      </Container>
     </form>
   );
 };

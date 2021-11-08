@@ -1,26 +1,47 @@
+import { AppBar, Box, Button, Link, Toolbar } from "@mui/material";
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { UserContext } from "../App";
 
 const NavBar = () => {
   const { user, logout } = useContext(UserContext);
-
+  const linkProps = {
+    underline: "hover",
+    component: NavLink,
+    color: "text.primary",
+  };
+  
   return (
-    <nav>
-      <NavLink to="/">Home</NavLink>
-      {user
-        ? <>
-          <NavLink to="companies">Companies</NavLink>
-          <NavLink to="jobs">Jobs</NavLink>
-          <NavLink to="profile">Profile</NavLink>
-          <span onClick={logout}>Logout {user.username}</span>
-        </>
-        : <>
-          <NavLink to="signup">Signup</NavLink>
-          <NavLink to="login">Login</NavLink>
-        </>
-      }
-    </nav>
+    <AppBar enableColorOnDark color="secondary" component="nav" position="sticky">
+      <Toolbar>
+        <Box sx={{
+          display: "flex",
+          justifyContent: "space-evenly",
+          width: "100%",
+          alignItems: "center"
+        }}>
+          <Link {...linkProps} to="/">Home</Link>
+          {user
+            ? <>
+              <Link {...linkProps} to="companies">Companies</Link>
+              <Link {...linkProps} to="jobs">Jobs</Link>
+              <Link {...linkProps} to="profile">Profile</Link>
+              <Button
+                variant="contained"
+                onClick={logout}
+                color="warning"
+              >
+                Logout
+              </Button>
+            </>
+            : <>
+              <Link {...linkProps} to="signup">Sign Up</Link>
+              <Link {...linkProps} to="login">Login</Link>
+            </>
+          }
+        </Box>
+      </Toolbar>
+    </AppBar>
   );
 };
 

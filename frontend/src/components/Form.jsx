@@ -1,9 +1,11 @@
+import { Button } from "@mui/material";
+import { Box } from "@mui/system";
 import useFormData from "../hooks/useFormData";
 import FormField from "./FormField";
 
-const Form = ({initialState, submit, submitForm, labels}) => {
+const Form = ({ initialState, submit, submitForm, labels }) => {
   const [formData, handleChange, resetFormData] = useFormData(initialState);
-  
+
   function getType(name) {
     return name === "password"
       ? "password"
@@ -20,15 +22,33 @@ const Form = ({initialState, submit, submitForm, labels}) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      {Object.entries(formData).map(([key, value]) => <FormField
-        key={key}
-        handleChange={handleChange}
-        value={value}
-        name={key}
-        type={getType(key)}
-        label={labels[key]}
-      />)}
-      <button type="submit">{submit}</button>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column"
+        }}
+      >
+        {Object.entries(formData).map(([key, value]) => <FormField
+          key={key}
+          handleChange={handleChange}
+          value={value}
+          name={key}
+          type={getType(key)}
+          label={labels[key]}
+        />)}
+        <Button
+          type="submit"
+          variant="outlined"
+          color="success"
+          sx={{
+            mt: 2,
+            width: "min-content",
+            alignSelf: "end"
+          }}
+        >
+          {submit}
+        </Button>
+      </Box>
     </form>
   );
 };

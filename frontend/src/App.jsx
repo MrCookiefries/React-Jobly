@@ -41,7 +41,7 @@ const App = () => {
       setCurrentUser(userData);
     },
     async applyJob(id) {
-      const {username} = currentUser;
+      const { username } = currentUser;
       await JoblyApi.applyJob(username, id);
       await updateUserData(username);
     }
@@ -58,20 +58,18 @@ const App = () => {
       if (!token) return;
       const payload = jwt.decode(token);
       if (!payload) return;
-      const {username} = payload;
+      const { username } = payload;
       await updateUserData(username);
     })();
   }, [token]);
 
   return (
-    <>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <UserContext.Provider value={manageUser}>
-          <AppRoutes />
-        </UserContext.Provider>
-      </ThemeProvider>
-    </>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <UserContext.Provider value={manageUser}>
+        <AppRoutes />
+      </UserContext.Provider>
+    </ThemeProvider>
   );
 }
 

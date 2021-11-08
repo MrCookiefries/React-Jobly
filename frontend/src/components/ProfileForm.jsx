@@ -1,3 +1,4 @@
+import { Container, Paper, Typography } from "@mui/material";
 import { useContext } from "react";
 import { useNavigate } from "react-router";
 import { UserContext } from "../App";
@@ -24,15 +25,31 @@ const ProfileForm = () => {
   }
 
   return (
-    <>
-      <h2>Edit {user.username}</h2>
+    <Container maxWidth="xs">
+      <Paper
+        elevation={4}
+        sx={{
+          p: 2,
+          pb: 4
+        }}
+      >
+      <Typography
+        variant="h3"
+        component="h2"
+        color="primary"
+        gutterBottom
+        align="center"
+      >
+        Update Profile
+        </Typography>
       <Form
         initialState={initialState}
         submit="Update"
         submitForm={submitForm}
         labels={labels}
       />
-    </>
+      </Paper>
+    </Container>
   );
 };
 
